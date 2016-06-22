@@ -1,27 +1,28 @@
 mysqldata:
-	image: busybox
-	volumes:
-		- /var/lib/mysql
+    image: busybox:latest
+    volumes:
+        - /var/lib/mysql
 
 mysqld:
-	image: mysql
-	volumes_from:
-		- mysqldata
-	ports:
-		- 3306:3306
-	environment:
-		MYSQL_ROOT_PASSWORD: password
+    image: mysql:latest
+    volumes_from:
+        - mysqldata
+    ports:
+        - 3306:3306
+    environment:
+        MYSQL_ROOT_PASSWORD: password
 
 webdata:
-	image: busybox
-	volumes:
-		- $PWD:/var/www/html
+    image: busybox:latest
+    volumes:
+        - $PWD/data:/var/www/html
 
 webserver:
-	image: ubuntu
-	volumes_from:
-		- webdata
-	links:
-		- mysqld:mysqld
-	ports:
-		- 80:80
+    #image: cos7_httpd
+    build: ../../Dockerfiles/php5.6-apache
+    volumes_from:
+        - webdata
+    links:
+        - mysqld:mysqld
+    ports:
+        - 80:80
