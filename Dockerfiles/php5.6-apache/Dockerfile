@@ -2,7 +2,7 @@ FROM centos:7
 MAINTAINER shigeo shigeo@feem.co.jp
 
 # httpd (apache) とPHP5.6 をインストールするためのリポジトリ追加。念のため wget も。
-RUN ["yum", "install", "-y", "wget", "httpd", "epel-release"]
+RUN ["yum", "install", "-y", "less", "wget", "httpd", "epel-release"]
 RUN ["rpm", "-Uvh", "http://rpms.famillecollet.com/enterprise/remi-release-7.rpm"]
 
 # PHP5.6 をインストール。
